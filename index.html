@@ -1,61 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitHub Pages + Tailwind Example</title>
-  <!-- Tailwind CSS via CDN -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Jazyková škola Jill</title>
+
+  <!-- Tailwind + custom colors -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            bg: '#f0e0e9',
-            primary: '#93abc6',
-            secondary: '#f4d87e',
-            muted: '#c9dae3',
-            highlight: '#c0dedd',
+            brand: '#00C47F',        // the bright green
+            'brand-dark': '#00A86B', // hover state
+            'nav-blue': '#0A2557',   // the deep navy text
+            muted: '#F0F4F8'         // light gray for hover, bg
           },
-        },
-      },
+          fontFamily: {
+            sans: ['Inter','sans-serif']
+          }
+        }
+      }
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-bg text-gray-800 min-h-screen flex flex-col">
-  <!-- Navigation -->
-  <nav class="bg-primary text-white p-4">
-    <ul class="container mx-auto flex space-x-6">
-      <li><a href="#o-mne" class="hover:underline">O mne</a></li>
-      <li><a href="#o-studiu" class="hover:underline">O tom, proč studuji (Kisk)</a></li>
-      <li><a href="#reflexe" class="hover:underline">Reflexe předchozích semestrů</a></li>
-      <li><a href="#kontakt" class="hover:underline">Kontakt na mě</a></li>
-      <li><a href="#prace-kisku" class="hover:underline">Moje práce na Kisku/osobní blog</a></li>
-      <li><a href="#blog-js-jill" class="hover:underline">Blog JS Jill</a></li>
-      <li><a href="https://jazykovaskolajill.cz/" class="hover:underline" target="_blank" rel="noopener">JS JILL</a></li>
-    </ul> 
-  </nav>
+
+<body class="bg-white text-nav-blue font-sans antialiased">
+
+  <!-- HEADER -->
+  <header class="shadow-sm">
+    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="#" class="flex-shrink-0">
+        <img src="/path/to/logo.svg" alt="Jill logo" class="h-8">
+      </a>
+
+      <!-- Main nav -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+        <!-- Dropdown -->
+        <div class="relative group">
+          <button class="flex items-center text-brand hover:text-brand-dark transition">
+            JAZYKOVÉ KURZY
+            <svg class="w-4 h-4 ml-1 fill-current" viewBox="0 0 20 20">
+              <path d="M5 7l5 5 5-5H5z"/>
+            </svg>
+          </button>
+          <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none group-hover:pointer-events-auto">
+            <a href="#deti"  class="block px-4 py-2 text-nav-blue hover:bg-muted">Děti (MŠ, ZŠ)</a>
+            <a href="#studenti" class="block px-4 py-2 text-nav-blue hover:bg-muted">Studenti (SŠ)</a>
+            <a href="#dospeli" class="block px-4 py-2 text-nav-blue hover:bg-muted">Dospělí</a>
+          </div>
+        </div>
+
+        <a href="#o-nas" class="hover:text-nav-blue/80 transition">O nás</a>
+        <a href="#kontakt" class="hover:text-nav-blue/80 transition">Kontakt</a>
+      </nav>
+
+      <!-- Utilities -->
+      <div class="flex items-center space-x-4">
+        <a href="#otestujte" class="px-4 py-2 border-2 border-brand text-brand rounded-full text-sm font-semibold hover:bg-brand hover:text-white transition">
+          OTESTUJTE SVOU ÚROVEŇ →
+        </a>
+        <a href="#studenti" class="p-1 hover:text-brand transition" aria-label="Studenti">
+          <!-- Replace with your SVG icon -->
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="…"/>
+          </svg>
+        </a>
+        <button class="p-1 rounded hover:bg-muted transition" aria-label="Switch to English">
+          <img src="/path/to/gb-flag.svg" alt="EN" class="h-5 w-5">
+        </button>
+      </div>
+
+    </div>
+  </header>
 
 
-  <!-- Main Content -->
-  <main class="flex-grow container mx-auto p-8">
-    <h1 class="text-4xl font-bold text-secondary mb-4">Lorem Ipsum</h1>
-    <p class="mb-4 text-muted">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
-      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-      aliquip ex ea commodo consequat.
-    </p>
-    <p class="mb-4">
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-      laborum.
-    </p>
-    <button class="bg-highlight text-gray-800 px-4 py-2 rounded hover:bg-muted">Read More</button>
+  <!-- HERO -->
+  <main class="container mx-auto px-6 py-16">
+    <div class="max-w-2xl mx-auto text-center mb-12">
+      <p class="text-sm text-brand font-semibold uppercase mb-2">Skupinové kurzy</p>
+      <h1 class="text-4xl lg:text-5xl font-bold leading-tight text-nav-blue">
+        Pro koho jazykový kurz vybíráte?
+      </h1>
+    </div>
+
+    <!-- CARDS -->
+    <div class="grid gap-6 md:grid-cols-3">
+      <a href="#deti" class="border-2 border-brand rounded-lg p-6 hover:shadow-lg transition">
+        <h3 class="text-xl font-bold text-nav-blue mb-1">Děti</h3>
+        <p class="text-gray-600">(MŠ, ZŠ)</p>
+      </a>
+      <a href="#studenti" class="border-2 border-brand rounded-lg p-6 hover:shadow-lg transition">
+        <h3 class="text-xl font-bold text-nav-blue mb-1">Studenti</h3>
+        <p class="text-gray-600">(SŠ)</p>
+      </a>
+      <a href="#dospeli" class="border-2 border-brand rounded-lg p-6 hover:shadow-lg transition">
+        <h3 class="text-xl font-bold text-nav-blue">Dospělí</h3>
+      </a>
+    </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-secondary text-white p-4 text-center">
-    &copy; 2025 GitHub Pages Tailwind Example
-  </footer>
+
+  <!-- you can continue adding your sections here… -->
+
 </body>
 </html>

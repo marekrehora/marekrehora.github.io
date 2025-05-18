@@ -2,123 +2,156 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Jazyková škola Jill</title>
 
-<!-- 1) extend your Tailwind colors -->
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          brand:    '#00C47F',   /* your bright green */
-          'brand-dark': '#00A86B', /* hover state */
-          'nav-blue':  '#0A2557', /* deep navy text */
-          muted:     '#F0F4F8'    /* light gray for backgrounds/hover */
-        }
-      }
+  <style>
+    /* 1) Brand palette as CSS variables */
+    :root {
+      --color-brand:       #00C47F;
+      --color-brand-dark:  #00A86B;
+      --color-nav-blue:    #0A2557;
+      --color-muted:       #F0F4F8;
     }
-  }
-</script>
-<script src="https://cdn.tailwindcss.com"></script>
 
+    /* 2) Reset & base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    body {
+      font-family: sans-serif;
+      color: var(--color-nav-blue);
+      background: #fff;
+    }
 
+    /* 3) Layout helpers */
+    .container {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+    }
+
+    /* 4) Header / nav styling */
+    header {
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--color-brand);
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    nav a,
+    nav button {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-nav-blue);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    nav a:hover,
+    nav button:hover {
+      color: var(--color-brand);
+    }
+
+    /* 5) Dropdown */
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 100%; left: 0;
+      margin-top: 0.5rem;
+      width: 12rem;
+      background: #fff;
+      border-radius: 0.375rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .dropdown-menu li a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: var(--color-nav-blue);
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+    .dropdown-menu li a:hover {
+      background: var(--color-muted);
+    }
+  </style>
 </head>
 
-<body class="bg-white text-nav-blue font-sans antialiased">
+<body>
 
-  <!-- 2) the nav bar -->
-<header class="bg-white shadow-sm">
-  <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+  <header>
+    <div class="container">
+      <!-- Logo -->
+      <a href="#" class="logo">Jill</a>
 
-    <!-- logo placeholder — swap for your real logo later -->
-    <a href="#" class="text-2xl font-bold text-brand">Jill</a>
+      <!-- Menu -->
+      <nav>
+        <ul>
+          <li><a href="#o-mne">O mne</a></li>
+          <li>
+            <a href="#o-studiu">
+              Stránka o tom, proč studuji, co studuji (Kisk)
+            </a>
+          </li>
 
-    <!-- menu -->
-    <nav>
-      <ul class="flex space-x-8 text-sm font-medium items-center">
+          <!-- Reflexe dropdown -->
+          <li class="dropdown">
+            <button>
+              Reflexe předchozích semestrů
+              <span style="font-size:.75em; margin-left:.25em;">▼</span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#zima-2024">Zima 2024</a></li>
+              <li><a href="#jaro-2025">Jaro 2025</a></li>
+              <!-- další semestry sem -->
+            </ul>
+          </li>
 
-        <li>
-          <a href="#o-mne"
-             class="text-nav-blue hover:text-brand transition">
-            O mne
-          </a>
-        </li>
-
-        <li>
-          <a href="#o-studiu"
-             class="text-nav-blue hover:text-brand transition">
-            Stránka o tom, proč studuji, co studuji (Kisk)
-          </a>
-        </li>
-
-        <!-- Reflexe dropdown -->
-        <li class="relative group">
-          <button class="flex items-center text-nav-blue hover:text-brand transition">
-            Reflexe předchozích semestrů
-            <svg class="w-4 h-4 ml-1 fill-current" viewBox="0 0 20 20">
-              <path d="M5 7l5 5 5-5H5z"/>
-            </svg>
-          </button>
-          <ul
-            class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg
-                   opacity-0 group-hover:opacity-100 transition-opacity
-                   pointer-events-none group-hover:pointer-events-auto">
-            <li>
-              <a href="#zima-2024"
-                 class="block px-4 py-2 text-nav-blue hover:bg-muted transition">
-                Zima 2024
-              </a>
-            </li>
-            <li>
-              <a href="#jaro-2025"
-                 class="block px-4 py-2 text-nav-blue hover:bg-muted transition">
-                Jaro 2025
-              </a>
-            </li>
-            <!-- další semestry... -->
-          </ul>
-        </li>
-
-        <li>
-          <a href="#kontakt"
-             class="text-nav-blue hover:text-brand transition">
-            Kontakt na mě
-          </a>
-        </li>
-
-        <li>
-          <a href="#prace-kisku"
-             class="text-nav-blue hover:text-brand transition">
-            Moje práce na Kisku/osobní blog
-          </a>
-        </li>
-
-        <li>
-          <a href="#blog-js-jill"
-             class="text-nav-blue hover:text-brand transition">
-            Blog JS Jill
-          </a>
-        </li>
-
-        <li>
-          <a href="https://jazykovaskolajill.cz/"
-             target="_blank" rel="noopener"
-             class="text-nav-blue hover:text-brand transition">
-            JS JILL
-          </a>
-        </li>
-
-      </ul>
-    </nav>
-
-  </div>
-</header>
-
-
-
-
-  <!-- you can continue adding your sections here… -->
+          <li><a href="#kontakt">Kontakt na mě</a></li>
+          <li>
+            <a href="#prace-kisku">
+              Moje práce na Kisku / osobní blog
+            </a>
+          </li>
+          <li><a href="#blog-js-jill">Blog JS Jill</a></li>
+          <li>
+            <a href="https://jazykovaskolajill.cz/"
+               target="_blank" rel="noopener">
+              JS JILL
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
 </body>
 </html>
